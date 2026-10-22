@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Painel Atacado Lume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2c1 8 6 13 14 14-8 1-13 6-14 14-1-8-6-13-14-14 8-1 13-6 14-14z' fill='%23B8924A'/%3E%3C/svg%3E">
+<style>
+:root{--ink:#141210;--paper:#fff;--mist:#f6f4f1;--line:#e4dfd8;--muted:#6f675e;--gold:#b8924a;--gold-deep:#8c6a2c;
+--pend:#9a6b12;--pend-bg:#fbf3e2;--ok:#2f6b47;--ok-bg:#e8f3ec;--no:#a23b2a;--no-bg:#fbecea;
+--display:"Marcellus",Georgia,serif;--body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--body);background:var(--mist);color:var(--ink);font-size:14px;line-height:1.5}
+header{background:var(--ink);color:#f3efe9;padding:18px max(16px,4vw);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:22px}
+.logo svg{width:22px;height:22px}
+.logo small{font-family:var(--body);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-left:8px}
+main{padding:24px max(16px,4vw);max-width:1100px;margin:0 auto}
+.login{max-width:380px;margin:12vh auto;background:var(--paper);border-radius:16px;padding:28px;display:grid;gap:14px}
+.login h1{font-family:var(--display);font-weight:400;font-size:26px;margin:0}
+input,select,textarea{font:inherit;width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
+input:focus,textarea:focus{outline:none;border-color:var(--gold)}
+button{font:inherit;font-weight:600;cursor:pointer;border-radius:10px;border:1px solid var(--ink);background:var(--ink);color:#fff;padding:10px 16px}
+button.ghost{background:transparent;color:var(--ink)}
+button.small{padding:7px 12px;font-size:13px}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.err{color:var(--no);font-size:13px;min-height:18px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.stat{background:var(--paper);border-radius:12px;padding:14px 16px;border:1px solid var(--line);cursor:pointer;text-align:left;color:var(--ink);font-weight:400}
+.stat[aria-pressed=true]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.stat b{display:block;font-size:26px;font-family:var(--display);font-weight:400;font-variant-numeric:tabular-nums}
+.stat span{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.12em}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tools{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.tools input{flex:1;min-width:200px}
+.list{display:grid;gap:12px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px}
+@media (max-width:700px){.card{grid-template-columns:1fr}}
+.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.top h3{margin:0;font-size:16px}
+.pill{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.pill.pendente{background:var(--pend-bg);color:var(--pend)}
+.pill.aprovado{background:var(--ok-bg);color:var(--ok)}
+.pill.recusado{background:var(--no-bg);color:var(--no)}
+.meta{color:var(--muted);font-size:13px;margin-top:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:6px 18px;margin-top:10px}
+.grid div{min-width:0;overflow-wrap:anywhere}
+.grid span{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.obs{margin-top:10px;background:var(--mist);border-radius:8px;padding:8px 10px;font-size:13px}
+.acts{display:flex;flex-direction:column;gap:8px;min-width:180px}
+@media (max-width:700px){.acts{flex-direction:row;flex-wrap:wrap;min-width:0}}
+.acts a{display:inline-flex;justify-content:center;align-items:center;gap:6px;text-decoration:none;font-weight:600;font-size:13px;border-radius:10px;padding:8px 12px;border:1px solid var(--line);color:var(--ink)}
+.acts .ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.acts .no{background:transparent;border-color:var(--no);color:var(--no)}
+.empty{background:var(--paper);border:1px dashed var(--line);border-radius:14px;padding:40px;text-align:center;color:var(--muted)}
+.note{font-size:12px;color:var(--muted)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><svg viewBox="0 0 32 32"><path d="M16 2c1 8 6 13 14 14-8 1-13 6-14 14-1-8-6-13-14-14 8-1 13-6 14-14z" fill="#B8924A"/></svg>Lume<small>Atacado</small></div>
+  <div id="hdrActs" hidden style="display:flex;gap:8px">
+    <button class="ghost small" id="csv" style="color:#f3efe9;border-color:#5a534b">Baixar planilha</button>
+    <button class="ghost small" id="sair" style="color:#f3efe9;border-color:#5a534b">Sair</button>
+  </div>
+</header>
+
+<main>
+  <form class="login" id="login">
+    <h1>Painel de atacado</h1>
+    <p class="note" style="margin:0">Cadastros feitos em lume-atacado. Entre com a senha do painel.</p>
+    <input type="password" id="senha" placeholder="Senha" autocomplete="current-password">
+    <div class="err" id="loginErr"></div>
+    <button type="submit">Entrar</button>
+  </form>
+
+  <section id="app" hidden>
+    <div class="stats">
+      <button class="stat" data-s="pendente" aria-pressed="true"><span>Pendentes</span><b id="cPend">0</b></button>
+      <button class="stat" data-s="aprovado" aria-pressed="false"><span>Aprovados</span><b id="cOk">0</b></button>
+      <button class="stat" data-s="recusado" aria-pressed="false"><span>Recusados</span><b id="cNo">0</b></button>
+      <button class="stat" data-s="todos" aria-pressed="false"><span>Todos</span><b id="cAll">0</b></button>
+    </div>
+    <div class="tools">
+      <input type="search" id="busca" placeholder="Buscar por nome, cidade, documento ou Instagram">
+      <button class="ghost" id="atualizar">Atualizar</button>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+</main>
+
+<script>
+const SUPA = "https://lycvnhpnldgjtchrvhiq.supabase.co/rest/v1";
+const KEY = "sb_publishable_jNMLyyetZ1LmXH8taKwiAg_353pc6fE";
+const CUPOM = "ATACADOLUME50";
+const $ = id => document.getElementById(id);
+let senha = "", rows = [], filtro = "pendente";
+try { senha = sessionStorage.getItem("lumeAtacadoSenha") || ""; } catch (e) {}
+
+async function rpc(fn, body){
+  const r = await fetch(SUPA + "/rpc/" + fn, { method: "POST", headers: { apikey: KEY, Authorization: "Bearer " + KEY, "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  if (!r.ok) { const t = await r.text(); throw new Error(t.includes("senha_incorreta") ? "senha" : "falha"); }
+  const t = await r.text(); return t ? JSON.parse(t) : null;
+}
+async function carregar(){
+  rows = await rpc("lume_atacado_listar", { p_senha: senha });
+  $("cPend").textContent = rows.filter(r => r.status === "pendente").length;
+  $("cOk").textContent = rows.filter(r => r.status === "aprovado").length;
+  $("cNo").textContent = rows.filter(r => r.status === "recusado").length;
+  $("cAll").textContent = rows.length;
+  render();
+}
+const fmtDoc = (t, d) => t === "CPF" ? d.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4") : d.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
+const fmtData = s => new Date(s).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "2-digit", hour: "2-digit", minute: "2-digit" });
+const wppNum = w => { let d = (w || "").replace(/\D/g, ""); if (d.length <= 11) d = "55" + d; return d; };
+function msgAprovado(r){
+  const nome = r.nome.split(" ")[0];
+  return "Oi, " + nome + "! Aqui é da Lume ✨\n\nSeu cadastro de atacadista foi aprovado!\n\nSeu cupom de atacado: *" + CUPOM + "*\n\n• 50% de desconto sobre o preço do site\n• Pedido mínimo de R$ 1.000 (valor do site, antes do desconto)\n\nÉ só escolher os produtos em lumesunglass.com.br e aplicar o cupom no carrinho. Qualquer dúvida, é só chamar aqui.";
+}
+function msgRecusado(r){
+  return "Oi, " + r.nome.split(" ")[0] + "! Aqui é da Lume. Obrigada pelo interesse no nosso atacado. No momento não conseguimos aprovar o seu cadastro, mas você pode comprar no varejo pelo site lumesunglass.com.br. Qualquer dúvida, é só chamar!";
+}
+function el(tag, attrs, ...kids){ const e = document.createElement(tag); Object.entries(attrs || {}).forEach(([k, v]) => k === "class" ? e.className = v : e.setAttribute(k, v)); kids.flat().forEach(k => e.append(k)); return e; }
+function render(){
+  const q = $("busca").value.trim().toLowerCase();
+  const list = rows.filter(r => (filtro === "todos" || r.status === filtro) && (!q || [r.nome, r.cidade, r.documento, r.instagram, r.whatsapp].join(" ").toLowerCase().includes(q)));
+  const box = $("list"); box.replaceChildren();
+  if (!list.length) { box.append(el("div", { class: "empty" }, rows.length ? "Nenhum cadastro nesse filtro." : "Nenhum cadastro ainda. Quando alguém preencher o formulário de atacado, ele aparece aqui.")); return; }
+  list.forEach(r => {
+    const info = el("div", {},
+      el("div", { class: "top" }, el("h3", {}, r.nome), el("span", { class: "pill " + r.status }, r.status)),
+      el("div", { class: "meta" }, "Recebido em " + fmtData(r.created_at) + " · " + r.cidade + "/" + r.uf),
+      el("div", { class: "grid" },
+        el("div", {}, el("span", {}, r.tipo_documento), fmtDoc(r.tipo_documento, r.documento)),
+        el("div", {}, el("span", {}, "WhatsApp"), r.whatsapp),
+        el("div", {}, el("span", {}, "E-mail"), r.email || "—"),
+        el("div", {}, el("span", {}, "Instagram / site"), r.instagram || "—"),
+        el("div", {}, el("span", {}, "Vende como"), r.perfil || "—"),
+        el("div", {}, el("span", {}, "Quer revender"), (r.interesse || []).join(", ") || "—"),
+        el("div", {}, el("span", {}, "Volume por pedido"), r.volume || "—"),
+        el("div", {}, el("span", {}, "Conheceu por"), r.como_conheceu || "—")
+      )
+    );
+    if (r.observacoes) info.append(el("div", { class: "obs" }, r.observacoes));
+    const acts = el("div", { class: "acts" });
+    const wa = "https://wa.me/" + wppNum(r.whatsapp) + "?text=";
+    if (r.status !== "aprovado") { const b = el("button", { class: "small", style: "background:var(--ok);border-color:var(--ok)" }, "Aprovar"); b.onclick = () => mudar(r, "aprovado"); acts.append(b); }
+    else acts.append(el("a", { class: "ok", href: wa + encodeURIComponent(msgAprovado(r)), target: "_blank", rel: "noopener" }, "Enviar cupom no WhatsApp"));
+    if (r.status !== "recusado") { const b = el("button", { class: "small ghost", style: "border-color:var(--no);color:var(--no)" }, "Recusar"); b.onclick = () => mudar(r, "recusado"); acts.append(b); }
+    else acts.append(el("a", { href: wa + encodeURIComponent(msgRecusado(r)), target: "_blank", rel: "noopener" }, "Avisar no WhatsApp"));
+    if (r.status !== "pendente") { const b = el("button", { class: "small ghost" }, "Voltar p/ pendente"); b.onclick = () => mudar(r, "pendente"); acts.append(b); }
+    acts.append(el("a", { href: "https://wa.me/" + wppNum(r.whatsapp), target: "_blank", rel: "noopener" }, "Abrir conversa"));
+    box.append(el("article", { class: "card" }, info, acts));
+  });
+}
+async function mudar(r, status){
+  try {
+    await rpc("lume_atacado_atualizar", { p_senha: senha, p_id: r.id, p_status: status, p_nota: r.nota_admin || "" });
+    r.status = status; await carregar();
+    if (status === "aprovado") window.open("https://wa.me/" + wppNum(r.whatsapp) + "?text=" + encodeURIComponent(msgAprovado(r)), "_blank", "noopener");
+  } catch (e) { alert("Não foi possível salvar. Tente de novo."); }
+}
+document.querySelectorAll(".stat").forEach(b => b.onclick = () => { filtro = b.dataset.s; document.querySelectorAll(".stat").forEach(x => x.setAttribute("aria-pressed", x === b)); render(); });
+$("busca").oninput = render;
+$("atualizar").onclick = () => carregar();
+$("sair").onclick = () => { try { sessionStorage.removeItem("lumeAtacadoSenha"); } catch (e) {} location.reload(); };
+$("csv").onclick = () => {
+  const cols = ["created_at","status","nome","tipo_documento","documento","whatsapp","email","cidade","uf","instagram","perfil","interesse","volume","como_conheceu","observacoes"];
+  const esc = v => '"' + String(Array.isArray(v) ? v.join(", ") : (v ?? "")).replace(/"/g, '""') + '"';
+  const csv = "﻿" + cols.join(";") + "\n" + rows.map(r => cols.map(c => esc(r[c])).join(";")).join("\n");
+  const a = el("a", { href: URL.createObjectURL(new Blob([csv], { type: "text/csv" })), download: "cadastros-atacado-lume.csv" }); a.click();
+};
+async function entrar(){
+  try { await carregar(); $("login").hidden = true; $("app").hidden = false; $("hdrActs").hidden = false; try { sessionStorage.setItem("lumeAtacadoSenha", senha); } catch (e) {} }
+  catch (e) { $("loginErr").textContent = e.message === "senha" ? "Senha incorreta." : "Não foi possível conectar. Tente de novo."; senha = ""; }
+}
+$("login").onsubmit = e => { e.preventDefault(); senha = $("senha").value; $("loginErr").textContent = ""; entrar(); };
+if (senha) entrar();
+</script>
+</body>
+</html>

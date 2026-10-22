@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atacado Lume · Cadastro de revendedores</title>
+<meta name="description" content="Cadastre-se para comprar óculos e relógios Lume no atacado, com 50% de desconto sobre o preço do site.">
+<meta property="og:title" content="Seja atacadista Lume">
+<meta property="og:description" content="Óculos de sol, óculos de grau e relógios com 50% de desconto para revenda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2c1 8 6 13 14 14-8 1-13 6-14 14-1-8-6-13-14-14 8-1 13-6 14-14z' fill='%23B8924A'/%3E%3C/svg%3E">
+<style>
+/* Layout: editorial split — dark brand column with the offer, light form column. Gold used only for the sparkle, rules and the main button. */
+:root{
+  --ink:#141210;
+  --ink-2:#2a2622;
+  --paper:#ffffff;
+  --mist:#f6f4f1;
+  --line:#e4dfd8;
+  --muted:#6f675e;
+  --gold:#b8924a;
+  --gold-deep:#8c6a2c;
+  --ok:#2f6b47;
+  --err:#a23b2a;
+  --display:"Marcellus",Georgia,"Times New Roman",serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--body);color:var(--ink);background:var(--paper);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);min-height:100vh}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}}
+
+/* Brand column */
+.brand{background:var(--ink);color:#f3efe9;padding:48px max(24px,5vw);display:flex;flex-direction:column;gap:40px;position:relative;overflow:hidden}
+.brand::after{content:"";position:absolute;right:-120px;bottom:-120px;width:360px;height:360px;border-radius:50%;border:1px solid rgba(184,146,74,.25)}
+.brand::before{content:"";position:absolute;right:-60px;bottom:-60px;width:240px;height:240px;border-radius:50%;border:1px solid rgba(184,146,74,.18)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo svg{width:30px;height:30px}
+.logo span{font-family:var(--display);font-size:30px;letter-spacing:.02em;color:#f3efe9}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.brand h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,4.2vw,52px);line-height:1.08;margin:12px 0 16px;text-wrap:balance}
+.brand p.lead{color:#cfc7bc;max-width:42ch;margin:0}
+.offer{display:flex;align-items:baseline;gap:14px;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);padding:22px 0}
+.offer b{font-family:var(--display);font-weight:400;font-size:64px;line-height:1;color:var(--gold)}
+.offer small{color:#cfc7bc;font-size:14px;line-height:1.4}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:18px;position:relative;z-index:1}
+.steps li{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start}
+.steps .n{width:34px;height:34px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:grid;place-items:center;font-size:13px;font-weight:600}
+.steps strong{display:block;font-weight:600;color:#f3efe9}
+.steps span{color:#b9b0a4;font-size:14px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:auto;position:relative;z-index:1}
+.facts div{border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px}
+.facts b{display:block;font-size:15px;color:#f3efe9}
+.facts span{font-size:12px;color:#b9b0a4}
+@media (max-width:480px){.facts{grid-template-columns:1fr}}
+
+/* Form column */
+.formcol{padding:48px max(20px,5vw);background:var(--paper)}
+.formcol .inner{max-width:620px;margin:0 auto}
+.formcol h2{font-family:var(--display);font-weight:400;font-size:30px;margin:0 0 6px}
+.formcol .sub{color:var(--muted);margin:0 0 28px}
+fieldset{border:0;padding:0;margin:0 0 30px;display:grid;gap:16px}
+legend{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;padding:0;margin-bottom:14px;display:flex;align-items:center;gap:10px;width:100%}
+legend::after{content:"";flex:1;height:1px;background:var(--line)}
+.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.row.c3{grid-template-columns:2fr 1fr}
+@media (max-width:560px){.row,.row.c3{grid-template-columns:1fr}}
+.field{display:grid;gap:6px;min-width:0}
+label.l{font-size:13px;font-weight:600}
+label.l em{font-style:normal;color:var(--muted);font-weight:400}
+input[type=text],input[type=email],input[type=tel],select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--mist);border:1px solid transparent;border-radius:10px;padding:12px 14px;transition:border-color .15s,background .15s}
+textarea{min-height:96px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;background:var(--paper);border-color:var(--gold)}
+.field.bad input,.field.bad select{border-color:var(--err);background:#fff}
+.hint{font-size:12px;color:var(--muted)}
+.field .msg{font-size:12px;color:var(--err);display:none}
+.field.bad .msg{display:block}
+.seg{display:inline-flex;background:var(--mist);border-radius:10px;padding:4px;gap:4px;width:max-content}
+.seg button{font:inherit;font-size:13px;font-weight:600;border:0;background:transparent;padding:8px 16px;border-radius:7px;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed=true]{background:var(--ink);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-block;padding:9px 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;transition:all .15s;background:var(--paper)}
+.chips input:checked+span{background:var(--ink);border-color:var(--ink);color:#fff}
+.chips input:focus-visible+span{outline:2px solid var(--gold);outline-offset:2px}
+.group-bad .chips span{border-color:var(--err)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--ink-2)}
+.check input{margin-top:3px;accent-color:var(--ink);width:16px;height:16px}
+.terms{background:var(--mist);border-radius:12px;padding:16px 18px;font-size:14px;color:var(--ink-2)}
+.terms ul{margin:8px 0 0;padding-left:18px}
+.hp{position:absolute;left:-5000px}
+button.cta{width:100%;font:inherit;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14px;border:0;border-radius:12px;padding:16px;background:var(--ink);color:#fff;cursor:pointer;display:flex;justify-content:center;align-items:center;gap:10px;transition:background .15s}
+button.cta:hover{background:var(--gold-deep)}
+button.cta:disabled{opacity:.6;cursor:wait}
+button.cta svg{width:16px;height:16px}
+.alert{display:none;background:#fbecea;color:var(--err);border-radius:10px;padding:12px 14px;font-size:14px;margin-bottom:16px}
+.alert.show{display:block}
+.foot{margin-top:24px;font-size:13px;color:var(--muted);text-align:center}
+.foot a{color:var(--ink)}
+
+/* Success */
+.done{display:none;text-align:left}
+.done.show{display:block}
+.done .badge{width:56px;height:56px;border-radius:50%;background:var(--ink);display:grid;place-items:center;margin-bottom:20px}
+.done .badge svg{width:26px;height:26px}
+.done h2{margin-bottom:10px}
+.done .next{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:22px 0}
+.done .next ol{margin:8px 0 0;padding-left:18px}
+.btn-line{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink);border-radius:12px;padding:13px 18px;text-decoration:none;font-weight:600;font-size:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside class="brand">
+    <a class="logo" href="https://lumesunglass.com.br" aria-label="Lume, ir para a loja">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2c1 8 6 13 14 14-8 1-13 6-14 14-1-8-6-13-14-14 8-1 13-6 14-14z" fill="#B8924A"/><path d="M6 1c.4 2.6 1.6 3.8 4 4-2.4.4-3.6 1.6-4 4-.4-2.4-1.6-3.6-4-4 2.4-.2 3.6-1.4 4-4z" fill="#B8924A" opacity=".7"/></svg>
+      <span>Lume</span>
+    </a>
+    <div>
+      <div class="eyebrow">Programa de atacado</div>
+      <h1>Revenda óculos e relógios Lume</h1>
+      <p class="lead">Óculos de sol com proteção UVA/UVB, armações de grau e relógios selecionados para você vender com margem.</p>
+    </div>
+    <div class="offer">
+      <b>50%</b>
+      <small>de desconto sobre o preço do site,<br>em pedidos a partir de R$ 1.000</small>
+    </div>
+    <ol class="steps">
+      <li><div class="n">1</div><div><strong>Faça seu cadastro</strong><span>Leva uns 2 minutos.</span></div></li>
+      <li><div class="n">2</div><div><strong>A gente analisa</strong><span>Você recebe a resposta no seu WhatsApp.</span></div></li>
+      <li><div class="n">3</div><div><strong>Compre com seu cupom</strong><span>Aprovado, você recebe o cupom de atacado e compra direto no site.</span></div></li>
+    </ol>
+    <div class="facts">
+      <div><b>R$ 1.000</b><span>pedido mínimo</span></div>
+      <div><b>3 meses</b><span>garantia nos relógios</span></div>
+      <div><b>Brasil todo</b><span>envio para todo o país</span></div>
+    </div>
+  </aside>
+
+  <main class="formcol">
+    <div class="inner">
+      <form id="f" novalidate>
+        <h2>Cadastro de atacadista</h2>
+        <p class="sub">Preencha seus dados. Os campos sem a marcação <em>opcional</em> são obrigatórios.</p>
+        <div class="alert" id="alert" role="alert"></div>
+        <input class="hp" type="text" name="empresa_site" id="empresa_site" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <fieldset>
+          <legend>Seus dados</legend>
+          <div class="field" data-f="nome">
+            <label class="l" for="nome">Nome completo ou razão social</label>
+            <input type="text" id="nome" autocomplete="name" maxlength="120">
+            <span class="msg">Escreva seu nome completo.</span>
+          </div>
+          <div class="field" data-f="documento">
+            <label class="l" for="documento">Documento</label>
+            <div class="seg" role="group" aria-label="Tipo de documento">
+              <button type="button" id="tCPF" aria-pressed="true">CPF</button>
+              <button type="button" id="tCNPJ" aria-pressed="false">CNPJ</button>
+            </div>
+            <input type="text" id="documento" inputmode="numeric" placeholder="000.000.000-00" autocomplete="off">
+            <span class="msg" id="docMsg">CPF inválido. Confira os números.</span>
+          </div>
+          <div class="row">
+            <div class="field" data-f="whatsapp">
+              <label class="l" for="whatsapp">WhatsApp</label>
+              <input type="tel" id="whatsapp" inputmode="numeric" placeholder="(19) 99999-9999" autocomplete="tel">
+              <span class="msg">Informe um WhatsApp com DDD.</span>
+            </div>
+            <div class="field" data-f="email">
+              <label class="l" for="email">E-mail <em>opcional</em></label>
+              <input type="email" id="email" autocomplete="email" maxlength="160">
+              <span class="msg">Confira o e-mail.</span>
+            </div>
+          </div>
+          <div class="row c3">
+            <div class="field" data-f="cidade">
+              <label class="l" for="cidade">Cidade</label>
+              <input type="text" id="cidade" autocomplete="address-level2" maxlength="80">
+              <span class="msg">Informe sua cidade.</span>
+            </div>
+            <div class="field" data-f="uf">
+              <label class="l" for="uf">Estado</label>
+              <select id="uf" autocomplete="address-level1">
+                <option value="">UF</option>
+              </select>
+              <span class="msg">Escolha o estado.</span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="l" for="instagram">Instagram ou site da sua loja <em>opcional</em></label>
+            <input type="text" id="instagram" placeholder="@sualoja" maxlength="80">
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Sobre a sua revenda</legend>
+          <div class="field" data-f="perfil" id="gPerfil">
+            <span class="l">Como você vende hoje?</span>
+            <div class="chips">
+              <label><input type="radio" name="perfil" value="Loja física"><span>Loja física</span></label>
+              <label><input type="radio" name="perfil" value="Loja online"><span>Loja online</span></label>
+              <label><input type="radio" name="perfil" value="Revendedora autônoma"><span>Revendedora autônoma</span></label>
+              <label><input type="radio" name="perfil" value="Ótica"><span>Ótica</span></label>
+              <label><input type="radio" name="perfil" value="Estou começando"><span>Estou começando</span></label>
+            </div>
+            <span class="msg">Escolha uma opção.</span>
+          </div>
+          <div class="field" data-f="interesse" id="gInteresse">
+            <span class="l">O que você quer revender?</span>
+            <div class="chips">
+              <label><input type="checkbox" name="interesse" value="Óculos de sol"><span>Óculos de sol</span></label>
+              <label><input type="checkbox" name="interesse" value="Óculos de grau"><span>Armações de grau</span></label>
+              <label><input type="checkbox" name="interesse" value="Relógios"><span>Relógios</span></label>
+            </div>
+            <span class="msg">Escolha pelo menos um.</span>
+          </div>
+          <div class="row">
+            <div class="field" data-f="volume">
+              <label class="l" for="volume">Quanto pretende comprar por pedido?</label>
+              <select id="volume">
+                <option value="">Escolha</option>
+                <option>R$ 1.000 a R$ 2.000</option>
+                <option>R$ 2.000 a R$ 5.000</option>
+                <option>Acima de R$ 5.000</option>
+                <option>Ainda não sei</option>
+              </select>
+              <span class="msg">Escolha uma opção.</span>
+            </div>
+            <div class="field">
+              <label class="l" for="como">Como conheceu a Lume? <em>opcional</em></label>
+              <select id="como">
+                <option value="">Escolha</option>
+                <option>Instagram</option>
+                <option>Indicação</option>
+                <option>Google</option>
+                <option>TikTok</option>
+                <option>Já sou cliente</option>
+                <option>Outro</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label class="l" for="obs">Quer contar mais alguma coisa? <em>opcional</em></label>
+            <textarea id="obs" maxlength="1000" placeholder="Ex.: modelos que mais saem na sua região, se vende em feiras, etc."></textarea>
+          </div>
+        </fieldset>
+
+        <div class="terms">
+          <strong>Condições do atacado</strong>
+          <ul>
+            <li>50% de desconto sobre o preço do site, com o cupom de atacado.</li>
+            <li>Pedido mínimo de R$ 1.000, somando os produtos pelo preço do site.</li>
+            <li>O cupom é pessoal e é liberado só para cadastros aprovados.</li>
+          </ul>
+        </div>
+        <div class="field" data-f="aceite" style="margin:18px 0 22px">
+          <label class="check"><input type="checkbox" id="aceite"> Li as condições e autorizo a Lume a falar comigo pelo WhatsApp sobre o meu cadastro.</label>
+          <span class="msg">Marque para continuar.</span>
+        </div>
+        <button class="cta" id="send" type="submit">
+          <span id="sendTxt">Enviar cadastro</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <p class="foot">Dúvidas? Fale com a gente no <a href="https://wa.me/5519994806124" target="_blank" rel="noopener">WhatsApp (19) 99480-6124</a> · <a href="https://lumesunglass.com.br">lumesunglass.com.br</a></p>
+      </form>
+
+      <section class="done" id="done" aria-live="polite">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="#B8924A" stroke-width="2.4"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <div class="eyebrow" style="color:var(--gold-deep)">Cadastro recebido</div>
+        <h2 id="doneTitle">Obrigada!</h2>
+        <p class="sub" style="margin:0">Seu cadastro de atacadista chegou para a equipe Lume.</p>
+        <div class="next">
+          <strong>O que acontece agora</strong>
+          <ol>
+            <li>A gente analisa seus dados.</li>
+            <li>Você recebe a resposta no WhatsApp <b id="doneWpp"></b>.</li>
+            <li>Se for aprovado, enviamos seu cupom de atacado para comprar no site.</li>
+          </ol>
+        </div>
+        <a class="btn-line" href="https://lumesunglass.com.br/produtos/">Ver os produtos enquanto isso →</a>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script>
+const SUPA = "https://lycvnhpnldgjtchrvhiq.supabase.co/rest/v1";
+const KEY = "sb_publishable_jNMLyyetZ1LmXH8taKwiAg_353pc6fE";
+const $ = id => document.getElementById(id);
+const UFS = "AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO".split(" ");
+UFS.forEach(u => { const o = document.createElement("option"); o.value = o.textContent = u; $("uf").appendChild(o); });
+
+let tipo = "CPF";
+function setTipo(t){
+  tipo = t;
+  $("tCPF").setAttribute("aria-pressed", t === "CPF");
+  $("tCNPJ").setAttribute("aria-pressed", t === "CNPJ");
+  $("documento").placeholder = t === "CPF" ? "000.000.000-00" : "00.000.000/0000-00";
+  $("docMsg").textContent = (t === "CPF" ? "CPF" : "CNPJ") + " inválido. Confira os números.";
+  $("documento").value = mask($("documento").value);
+}
+$("tCPF").onclick = () => setTipo("CPF");
+$("tCNPJ").onclick = () => setTipo("CNPJ");
+
+const digits = s => (s || "").replace(/\D/g, "");
+function mask(v){
+  const d = digits(v).slice(0, tipo === "CPF" ? 11 : 14);
+  if (tipo === "CPF") return d.replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  return d.replace(/(\d{2})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1/$2").replace(/(\d{4})(\d{1,2})$/, "$1-$2");
+}
+$("documento").addEventListener("input", e => e.target.value = mask(e.target.value));
+$("whatsapp").addEventListener("input", e => {
+  const d = digits(e.target.value).slice(0, 11);
+  e.target.value = d.length > 10 ? d.replace(/(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3") : d.replace(/(\d{2})(\d{0,4})(\d{0,4})/, (m, a, b, c) => (a ? "(" + a + ")" : "") + (b ? " " + b : "") + (c ? "-" + c : ""));
+});
+
+function cpfOk(c){
+  if (c.length !== 11 || /^(\d)\1+$/.test(c)) return false;
+  for (let t = 9; t < 11; t++) { let s = 0; for (let i = 0; i < t; i++) s += +c[i] * (t + 1 - i); if (((s * 10) % 11) % 10 !== +c[t]) return false; }
+  return true;
+}
+function cnpjOk(c){
+  if (c.length !== 14 || /^(\d)\1+$/.test(c)) return false;
+  const calc = n => { let s = 0, p = n - 7; for (let i = 0; i < n; i++) { s += +c[i] * p--; if (p < 2) p = 9; } const r = s % 11; return r < 2 ? 0 : 11 - r; };
+  return calc(12) === +c[12] && calc(13) === +c[13];
+}
+
+function mark(name, bad){ const el = document.querySelector('[data-f="' + name + '"]'); if (el) el.classList.toggle("bad", bad); return !bad; }
+function checked(name){ return [...document.querySelectorAll('input[name="' + name + '"]:checked')].map(i => i.value); }
+
+$("f").addEventListener("submit", async e => {
+  e.preventDefault();
+  $("alert").classList.remove("show");
+  if ($("empresa_site").value) return;
+  const doc = digits($("documento").value);
+  const wpp = digits($("whatsapp").value);
+  const email = $("email").value.trim();
+  const ok = [
+    mark("nome", $("nome").value.trim().length < 3),
+    mark("documento", !(tipo === "CPF" ? cpfOk(doc) : cnpjOk(doc))),
+    mark("whatsapp", wpp.length < 10 || wpp.length > 11),
+    mark("email", email !== "" && !/^\S+@\S+\.\S+$/.test(email)),
+    mark("cidade", $("cidade").value.trim().length < 2),
+    mark("uf", !$("uf").value),
+    mark("perfil", checked("perfil").length === 0),
+    mark("interesse", checked("interesse").length === 0),
+    mark("volume", !$("volume").value),
+    mark("aceite", !$("aceite").checked)
+  ].every(Boolean);
+  if (!ok) {
+    const first = document.querySelector(".field.bad");
+    if (first) { first.scrollIntoView({ behavior: "smooth", block: "center" }); const i = first.querySelector("input,select"); if (i) i.focus({ preventScroll: true }); }
+    return;
+  }
+  const btn = $("send"); btn.disabled = true; $("sendTxt").textContent = "Enviando...";
+  try {
+    const r = await fetch(SUPA + "/rpc/lume_atacado_cadastrar", {
+      method: "POST",
+      headers: { "apikey": KEY, "Authorization": "Bearer " + KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        p_nome: $("nome").value.trim(), p_tipo_documento: tipo, p_documento: doc,
+        p_whatsapp: $("whatsapp").value.trim(), p_email: email,
+        p_cidade: $("cidade").value.trim(), p_uf: $("uf").value,
+        p_instagram: $("instagram").value.trim(), p_perfil: checked("perfil")[0],
+        p_interesse: checked("interesse"), p_volume: $("volume").value,
+        p_como_conheceu: $("como").value, p_observacoes: $("obs").value.trim()
+      })
+    });
+    if (!r.ok) {
+      const t = await r.text();
+      if (t.includes("ja_cadastrado")) throw new Error("Já recebemos um cadastro com esse documento hoje. A gente vai te responder pelo WhatsApp.");
+      if (t.includes("documento_invalido")) throw new Error("Confira o número do documento.");
+      throw new Error("Não conseguimos enviar agora. Tente de novo em instantes ou fale com a gente no WhatsApp.");
+    }
+    $("f").style.display = "none";
+    $("doneTitle").textContent = "Obrigada, " + $("nome").value.trim().split(" ")[0] + "!";
+    $("doneWpp").textContent = $("whatsapp").value;
+    $("done").classList.add("show");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } catch (err) {
+    $("alert").textContent = err.message; $("alert").classList.add("show");
+    $("alert").scrollIntoView({ behavior: "smooth", block: "center" });
+  } finally { btn.disabled = false; $("sendTxt").textContent = "Enviar cadastro"; }
+});
+document.querySelectorAll("input,select,textarea").forEach(el => el.addEventListener("change", () => { const f = el.closest(".field"); if (f) f.classList.remove("bad"); }));
+</script>
+</body>
+</html>
